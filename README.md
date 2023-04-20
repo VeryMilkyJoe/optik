@@ -17,15 +17,15 @@ Optik is a work in progress and should not be used for real audits yet. Current 
 <img width="80%" src=".resources/hybrid_echidna.png"/> <br>
 </p>
 
-Optik allows to run the [Echidna](https://github.com/crytic/echidna) smart-contract 
-fuzzer in _hybrid_ mode. It basically couples Echidna with the [Maat](https://github.com/trailofbits/maat) symbolic executor that replays the Echidna corpus and extends it with new inputs that increase coverage. 
+Optik allows to run the [Echidna](https://github.com/crytic/echidna) smart-contract
+fuzzer in _hybrid_ mode. It basically couples Echidna with the [Maat](https://github.com/trailofbits/maat) symbolic executor that replays the Echidna corpus and extends it with new inputs that increase coverage.
 
 `hybrid-echidna` starts with several <i>incremental seeding</i> steps, where it seeds the corpus with short transactions sequences obtained by [Slither](https://github.com/crytic/slither)'s dataflow analysis, and uses symbolic execution more intensely to solve new inputs. The sequence length is incremented at each seeding step. Once it reaches a certain length threshold, `hybrid-echidna` falls back into its normal mode, starts to limit the number of symbolic inputs to solve, and stops using dataflow analysis for seeding the corpus.
 
 ### Usage
 
-Hybrid echidna can be used seamlessly in place of regular Echidna by replacing `echidna-test` with `hybrid-echidna` in your Echidna command line. 
-For example: 
+Hybrid echidna can be used seamlessly in place of regular Echidna by replacing `echidna` with `hybrid-echidna` in your Echidna command line.
+For example:
 
 ```
 hybrid-echidna MyContract.sol  --test-mode assertion --corpus-dir /tmp/test --contract MyContract
